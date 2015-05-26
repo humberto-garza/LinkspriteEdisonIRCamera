@@ -10,6 +10,15 @@ Linksprite Infrared Camera Edison Library
  - Explanation of the function Returns
  - Getting Started with the Arduino Expansion Board
  - Getting Started with the Mini Breakout Board
+----------
+
+Resources
+-------------
+ - Infrared JPEG Color Camera Serial UART TTL Level [Web Page](http://store.linksprite.com/infrared-jpeg-color-camera-serial-uart-ttl-level/)
+ - Infrared JPEG Color Camera Serial UART TTL Level [User Manual ](http://www.linksprite.com/upload/file/1291522825.pdf)
+
+
+----------
 
 Setting up your Arduino Board
 -------------
@@ -27,8 +36,6 @@ void loop()
        delay(1000);      
 }  
 ```
-
-
 ----------
 
 Reset Camera
@@ -74,3 +81,7 @@ echo -n -e \\x56\\x00\\x34\\x01\\x03 > /dev/ttyMFD1
 Return: 76 00 36 00 00 
 
 ----------
+
+
+
+
