@@ -36,7 +36,7 @@ void loop()
        delay(1000);      
 }  
 ```
- - Add the **C Folder** files to a directory of your preference
+ - Add the **C Folder** files to a directory of your preference within the Edison (Yocto)
  - Between the RX and TX of your camera and the Arduino's connect a 10K resistor
  - Power your Camera with a separate Power Source since the Arduino Breakout Limits the Current
  - You can power it with your computer using a normal USB cable
