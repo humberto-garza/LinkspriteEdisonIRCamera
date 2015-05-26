@@ -1,5 +1,5 @@
 # LinkspriteEdisonIRCamera
-nfrared JPEG Color Camera Serial UART TTL Level - Edison Library
+Infrared JPEG Color Camera Serial UART TTL Level - Edison Library
 
 ### There will be some extra modifications and documentation
 
