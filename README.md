@@ -10,6 +10,7 @@ Linksprite Infrared Camera Edison Library
  - Explanation of the function Returns
  - Getting Started with the Arduino Expansion Board
  - Getting Started with the Mini Breakout Board
+ 
 ----------
 
 Resources
