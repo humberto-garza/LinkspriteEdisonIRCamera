@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include "LNK_CAM.h"
+#include <termios.h>
 
 int main( int argc, char *argv[] )
 {
@@ -13,61 +14,48 @@ int main( int argc, char *argv[] )
 	unsigned char MH = 0x00;
 	unsigned char ML = 0x00;
 	//////////////////////////////////
+	printf("Waiting for Camera to reset: /dev/ttyMFD1...\n");
 	x = reset_camera();
-	printf("Reset: %d\n",x);
+	printf("Status: %d\n\n",x);
 	//////////////////////////////////
 
 
-
 	//////////////////////////////////
+	printf("Taking Photo: /dev/ttyMFD1...\n");
 	x = take_picture();
-	printf("Take1: %d\n",x);
+	printf("Status: %d\n\n",x);
+
 	//////////////////////////////////
+	printf("Reading Photo Size: /dev/ttyMFD1...\n");
 	x = read_size(&XH, &XL);
-	printf("XH=%x\nXL=%x\n", XH, XL);
+	printf("XH=%02x\nXL=%02x\nStatus: %d\n\n", XH, XL,x);
+
 	//////////////////////////////////
-	x = export_JPEG(XH, XL, MH, ML, 1);
-	printf("JPEG Ready %d\n",x);
+	printf("Exporting Photo to buffer...\n");
+	unsigned char *photo_buffer = NULL;
+	x = export_buf(XH, XL, MH, ML, &photo_buffer);
+	printf("Name %d\nStatus: %d\n\n",1, x);
+	printf("%02x_%02x_%02x_%02x\n\n",photo_buffer[0],photo_buffer[1],photo_buffer[x-2],photo_buffer[x-1]);
+
+
 	//////////////////////////////////
+	printf("Exporting Buffer to photo...\n");
+	buf_to_pic(&photo_buffer, x, 1);
+
+	//////////////////////////////////
+	printf("Exporting Photo to File...\n");
+	x = export_pic(XH, XL, MH, ML, 2);
+	printf("Name %d\nStatus: %d\n\n",2, x);
+
+	//////////////////////////////////
+	printf("Stoping Cam: /dev/ttyMFD1...\n");
 	x = stop_cam();
-	printf("Stop Done %d\n",x);
-	//////////////////////////////////
-	sleep(1);
-	//////////////////////////////////
-	x = take_picture();
-	printf("Take2: %d\n",x);
-	//////////////////////////////////
-	x = read_size(&XH, &XL);
-	printf("XH=%x\nXL=%x\n", XH, XL);
-	//////////////////////////////////
-	x = export_JPEG(XH, XL, MH, ML, 2);
-	printf("JPEG Ready %d\n",x);
-	//////////////////////////////////
-	x = stop_cam();
-	printf("Stop Done %d\n",x);
-	//////////////////////////////////
-	sleep(1);
-	//////////////////////////////////
-	x = take_picture();
-	printf("Take3: %d\n",x);
-	//////////////////////////////////
-	x = read_size(&XH, &XL);
-	printf("XH=%x\nXL=%x\n", XH, XL);
-	//////////////////////////////////
-	x = export_JPEG(XH, XL, MH, ML, 3);
-	printf("JPEG Ready %d\n",x);
-	//////////////////////////////////
-	x = stop_cam();
-	printf("Stop Done %d\n",x);
-	//////////////////////////////////
-	sleep(1);
+	printf("Status: %d\n\n",x);
 
+	//////////////////////////////////
 
-
-
-
-
-
+	
+	free(photo_buffer);
 	return 0;
 }
 
