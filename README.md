@@ -1,8 +1,36 @@
 # LinkspriteEdisonIRCamera
 Linksprite Infrared Camera Edison Library
 
-Edison JPEG Linksprite Commands
-===================
+### There will be some extra modifications and documentation
+
+ - Function to Change Baud
+ - Function to Change Ratio
+ - Function to Change Resolution
+ - Function to Activate Power Saving Mode
+ - Explanation of the function Returns
+ - Getting Started with the Arduino Expansion Board
+ - Getting Started with the Mini Breakout Board
+
+Setting up your Arduino Board
+-------------
+In order to make this code work with your Arduino Breakout Board, you will need to consider several steps:
+ - Between the RX and TX of your camera and the Arduino's connect a 10K resistor
+ - Power your Camera with a separate Power Source since the Arduino Breakout Limits the Current
+ - The easy way to activate the Serial Port to communicate with the camera is running this Arduino Sketch:
+```sh
+void setup() 
+{  
+       Serial1.begin(38400); 
+}  
+void loop() 
+{  
+       delay(1000);      
+}  
+```
+
+
+----------
+
 Reset Camera
 -------------
 echo -n -e \\x56\\x00\\x26\\x00 > /dev/ttyMFD1
