@@ -24,9 +24,8 @@ Resources
 Setting up your Arduino Board
 -------------
 In order to make this code work with your Arduino Breakout Board, you will need to consider several steps:
- - Between the RX and TX of your camera and the Arduino's connect a 10K resistor
- - Power your Camera with a separate Power Source since the Arduino Breakout Limits the Current
- - The easy way to activate the Serial Port to communicate with the camera is running this Arduino Sketch:
+ - Even though you will use your Arduino Board, you will program it using the Linux Terminal
+- The easy way to activate the Serial Port to communicate with the camera is running this Arduino Sketch:
 ```sh
 void setup() 
 {  
@@ -37,6 +36,27 @@ void loop()
        delay(1000);      
 }  
 ```
+ - Add the **C Folder** files to a directory of your preference
+ - Between the RX and TX of your camera and the Arduino's connect a 10K resistor
+ - Power your Camera with a separate Power Source since the Arduino Breakout Limits the Current
+ - You can power it with your computer using a normal USB cable
+ - Cut the USB Cable and you will see 4 cables (you will only use the Red and Black)
+  - Be carefull not to connect the other 2 cables
+ - Connect the RedUSB cable to the 5V pin of the camera
+ - Connect the BlackUSB cable to the Ground pin of the camera and to the Arduino Ground
+ - Compile the code:
+```sh
+ gcc main.c -o main.out
+```
+ - Run the code:
+```sh
+ chmod +x main.out
+ ./main.out
+```
+ - You will see that this sample main will output 2 fotos, the first one is created by printing the array that contains the photo, and the second one by printing directly to the file with no user-created array
+
+
+ 
 ----------
 
 Reset Camera
