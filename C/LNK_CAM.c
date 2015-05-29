@@ -18,7 +18,7 @@ int reset_camera()
 	if(buf[0]==0x76 && buf[2]==0x26)
 		result =0;
 	fclose(camera);
-	sleep(3);
+	sleep(2);
 	return result;
 }
 
@@ -61,52 +61,164 @@ int read_size(unsigned char *XH,unsigned char *XL)
 	return result;
 }
 
-int export_buf(unsigned char KH, unsigned char KL, unsigned char MH, unsigned char ML, unsigned char **photo_buffer)
+int export_buf(unsigned char KH, unsigned char KL, unsigned char MH, unsigned char ML, unsigned char **photo_buffer, int *size)
 {
+	//Open Camera Linux File
+	int camera = open("/dev/ttyMFD1", O_RDWR | O_NOCTTY);
+	if (camera == -1)
+		return -1;
+
 	//Time to send file delimiters
 	unsigned char XH = 0x00;
-	unsigned char XL = 0x0A;
+	unsigned char XL = 0x00;
 
-	//Open Camera File
+	//Command to Open Camera File
 	unsigned char jpeg[16] = {0x56, 0x00, 0x32, 0x0C, 0x00, 0x0A, 0x00, 0x00, MH, ML, 0x00, 0x00, KH, KL, XH, XL}; 
-	FILE *camera = fopen("/dev/ttyMFD1", "a+");
-
 	//Send command to return the JPEG File by the camera
-	fprintf(camera,"%c%c%c%c%c%c%c%c%c%c%c%c%x%x%x%02x",jpeg[0],jpeg[1],jpeg[2],jpeg[3],jpeg[4],jpeg[5],jpeg[6],jpeg[7],jpeg[8],jpeg[9],jpeg[10],jpeg[11],jpeg[12],jpeg[13],jpeg[14],jpeg[15]);
-	
-	//Read file delimeter
-	unsigned char sync[5] ={0x00};
-	fread(sync, 5, 1, camera);
-	//If the delimiter is not right, return -1
-	if(sync[0]!= 0x76 && sync[1]!= 0x00 && sync[2]!= 0x32 && sync[3]!= 0x00 && sync[4]!= 0x00)
-		return -1;
+	int n = write(camera, jpeg, 16);
 
 	//Assign the Size of the JPEG (It mus be calculated in these steps in order to make it work)
 	int fsizeH = ((long)KH)<<8;
 	int fsizeL = ((long)KL);
-	fsizeH += fsizeL;
+	fsizeH += fsizeL +10 ;
 
-	//Allocate the Proper Space for the buffer
-	*photo_buffer = malloc(fsizeH + 1);
-	fread(*photo_buffer, fsizeH, 1, camera);
+	//Allocate the Temporal Extra Space for the buffer
+	*photo_buffer = malloc(fsizeH);
+	*size = fsizeH;
 
-	//Flush the rest of the bytes sent by the camera until the delimiter is found
-	while(1)
+	int total = fsizeH/2048;
+	int x, aloc=0;
+
+	for(x=0; x<total+1; x++)
 	{	
-		sync[0] = sync[1];
-		sync[1] = sync[2];
-		sync[2] = sync[3];
-		sync[3] = sync[4];
-		sync[4] = fgetc(camera);
-
-		if(sync[0]== 0x76 && sync[1]== 0x00 && sync[2]== 0x32 && sync[3]== 0x00 && sync[4]== 0x00)
-			break;
+		n = read(camera, *photo_buffer+aloc, 2048);
+		aloc += n;
 	}
-	
-	fclose(camera);
-	return fsizeH;
+
+	close(camera);
+	return (aloc- *size);
 }
 
+int export_pic(unsigned char KH, unsigned char KL, unsigned char MH, unsigned char ML, int i)
+{
+	//Open Camera Linux File
+	int camera = open("/dev/ttyMFD1", O_RDWR | O_NOCTTY);
+	if (camera == -1)
+		return -1;
+
+	//Time to send file delimiters
+	unsigned char XH = 0x00;
+	unsigned char XL = 0x00;
+
+	//Command to Open Camera File
+	unsigned char jpeg[16] = {0x56, 0x00, 0x32, 0x0C, 0x00, 0x0A, 0x00, 0x00, MH, ML, 0x00, 0x00, KH, KL, XH, XL}; 
+	//Send command to return the JPEG File by the camera
+	int n = write(camera, jpeg, 16);
+
+	//Assign the Size of the JPEG (It mus be calculated in these steps in order to make it work)
+	int fsizeH = ((long)KH)<<8;
+	int fsizeL = ((long)KL);
+	fsizeH += fsizeL +10 ;
+
+	//Allocate the Temporal Extra Space for the buffer
+	unsigned char *photo_buffer = malloc(fsizeH);
+
+	int total = fsizeH/2048;
+	int x, aloc=0;
+
+	for(x=0; x<total+1; x++)
+	{	
+		n = read(camera, photo_buffer+aloc, 2048);
+		aloc += n;
+	}
+	//Open JPEG File to Export the Photo
+	char buffer[32]={0x00};
+	snprintf(buffer, sizeof(buffer),"foto%d.jpg",i);
+	FILE *foto = fopen(buffer, "w");
+
+	int m;
+	for(m = 5; m<fsizeH-5; m++)
+		fputc(photo_buffer[m], foto);
+
+
+	fclose(foto);
+	close(camera);
+	return (aloc- fsizeH);
+}
+
+
+
+void buf_to_pic(unsigned char **photo_buffer, int size, int num)
+{
+	//Open JPEG File to Export the Photo
+	char buffer[32]={0x00};
+	snprintf(buffer, sizeof(buffer),"foto%d.jpg", num);
+	FILE *foto = fopen(buffer, "w");
+
+	int x;
+	for(x=5; x<size-5; x++)
+		fputc((*photo_buffer)[x],foto);
+
+	fclose(foto);
+}
+
+int stop_cam()
+{
+	int result =-1;
+	char buf[4];
+	unsigned char stop[5] = {0x56, 0x00, 0x36, 0x01, 0x03}; 
+	FILE *camera = fopen("/dev/ttyMFD1", "a+");
+
+	fprintf(camera,"%c%c%c%c%c",stop[0],stop[1],stop[2],stop[3],stop[4]);
+	
+	fgets(buf,4,camera);
+	//printf("%02x_%02x_%02x_%02x\n",buf[0],buf[1],buf[2],buf[3]);
+	if(buf[0]==0x76 && buf[2]==0x36)
+		result =0;
+
+	fclose(camera);
+	return result;
+}
+
+int compression_ratio(unsigned char XX)
+{
+	int result =-1;
+	unsigned char buf[6];
+	unsigned char ratio[9] = {0x56, 0x00, 0x31, 0x05 , 0x01, 0x01, 0x12, 0x04, XX}; 
+	FILE *camera = fopen("/dev/ttyMFD1", "a+");
+
+	fprintf(camera,"%c%c%c%c%c%c%c%c%c",ratio[0],ratio[1],ratio[2],ratio[3],ratio[4],ratio[5],ratio[6],ratio[7],ratio[8]);
+	fgets(buf,6,camera);
+
+	//printf("%02x_%02x_%02x_%02x_%02x_%02x\n",buf[0],buf[1],buf[2],buf[3],buf[4],buf[5]);
+	if(buf[0]==0x76 && buf[2]==0x31 && buf[5]==XX)
+		result =0;
+
+	fclose(camera);
+	return result;
+}	
+
+int image_size(unsigned char XX)
+{
+	int result =-1;
+	unsigned char buf[5];
+	unsigned char ratio[9] = {0x56, 0x00, 0x31, 0x05 , 0x04, 0x01, 0x00, 0x19, XX}; 
+	FILE *camera = fopen("/dev/ttyMFD1", "a+");
+
+	fprintf(camera,"%c%c%c%c%c%c%c%c%c",ratio[0],ratio[1],ratio[2],ratio[3],ratio[4],ratio[5],ratio[6],ratio[7],ratio[8]);
+	fgets(buf,5,camera);
+
+	//printf("%02x_%02x_%02x_%02x_%02x\n",buf[0],buf[1],buf[2],buf[3],buf[4]);
+	if(buf[0]==0x76 && buf[2]==0x31)
+		result =0;
+	
+	fclose(camera);
+	result = result + reset_camera();
+	return result;
+}	
+
+
+/*
 
 int export_pic(unsigned char KH, unsigned char KL, unsigned char MH, unsigned char ML, int i)
 {
@@ -140,6 +252,7 @@ int export_pic(unsigned char KH, unsigned char KL, unsigned char MH, unsigned ch
 
 	//Allocate the Proper Space for the buffer
 	unsigned char *photo_buffer = malloc(fsizeH + 1);
+	
 	fread(photo_buffer, fsizeH, 1, camera);
 
 	//Flush the rest of the bytes sent by the camera until the delimiter is found
@@ -165,99 +278,4 @@ int export_pic(unsigned char KH, unsigned char KL, unsigned char MH, unsigned ch
 	return fsizeH;
 }
 
-void buf_to_pic(unsigned char **photo_buffer,int size, int num)
-{
-	//Open JPEG File to Export the Photo
-	char buffer[32]={0x00};
-	snprintf(buffer, sizeof(buffer),"foto%d.jpg", num);
-	FILE *foto = fopen(buffer, "w");
-
-	int x;
-	for(x=0; x<size; x++)
-		fputc((*photo_buffer)[x],foto);
-
-	fclose(foto);
-}
-
-int stop_cam()
-{
-	int result =-1;
-	char buf[4];
-	unsigned char stop[5] = {0x56, 0x00, 0x36, 0x01, 0x03}; 
-	FILE *camera = fopen("/dev/ttyMFD1", "a+");
-
-	fprintf(camera,"%c%c%c%c%c",stop[0],stop[1],stop[2],stop[3],stop[4]);
-	
-	fgets(buf,4,camera);
-	//printf("%02x_%02x_%02x_%02x\n",buf[0],buf[1],buf[2],buf[3]);
-	if(buf[0]==0x76 && buf[2]==0x36)
-		result =0;
-
-	fclose(camera);
-	return result;
-}
-
-int export_JPEG2(unsigned char KH, unsigned char KL, unsigned char MH, unsigned char ML, int i)
-{
-	//Reading margin
-	int a = 0x1FF;
-
-	KH = KH + a/0x100;
-    KL = KL + a%0x100;
-
-	unsigned char XH = 0x00;
-	unsigned char XL = 0x0A;
-	unsigned char jpeg[16] = {0x56, 0x00, 0x32, 0x0C, 0x00, 0x0A, 0x00, 0x00, MH, ML, 0x00, 0x00, KH, KL, XH, XL}; 
-	FILE *camera = fopen("/dev/ttyMFD1", "a+");
-
-	fprintf(camera,"%c%c%c%c%c%c%c%c%c%c%c%c%x%x%x%02x",jpeg[0],jpeg[1],jpeg[2],jpeg[3],jpeg[4],jpeg[5],jpeg[6],jpeg[7],jpeg[8],jpeg[9],jpeg[10],jpeg[11],jpeg[12],jpeg[13],jpeg[14],jpeg[15]);
-	
-	unsigned int last = 0x00;
-	unsigned int c0 = 0x00;
-	unsigned int c1 = 0x00;
-	unsigned int c2 = 0x00;
-	unsigned int c3 = 0x00;
-	unsigned int c4 = 0x00;
-
-	int x= 0;
-	int val =-1;
-
-	for(x=0;x<10;x++)
-	{
-		last = fgetc(camera);
-		c4 = c3;
-		c3 = c2;
-		c2 = c1;
-		c1 = c0;
-		c0 = last;
-	}
-
-	char buffer[32]={0x00};
-	snprintf(buffer, sizeof(buffer),"foto%d.jpg",i);
-	FILE *foto = fopen(buffer, "w");
-
-	while(1) 
-	{
-		last = fgetc(camera);
-		fputc(c4,foto);
-
-		c4 = c3;
-		c3 = c2;
-		c2 = c1;
-		c1 = c0;
-		c0 = last;
-
-		if(c4 ==0xff && c3== 0xd9 && val != 0)
-		{
-			val = 0;
-			fputc(c4,foto);
-			fputc(c3,foto);
-			fclose(foto);
-		}	
-		if(c4== 0x76 && c3== 0x00 && c2== 0x32 && c1== 0x00 && c0== 0x00)
-			break;
-	}
-
-	fclose(camera);
-	return val;
-}
+*/
