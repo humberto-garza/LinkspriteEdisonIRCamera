@@ -4,10 +4,10 @@ Infrared JPEG Color Camera Serial UART TTL Level - Edison Library
 UPDATES!
 -------------
  - Now you can Change the compression Ratio 
-  - I tried to change the ratio in the specified by the manufacturer but the camera refuses to do so; anyways the option to change it is there altough the camera will not make the change.
+  - I tried to change the ratio in the range specified by the manufacturer but the camera refuses to do so; anyways the option to change it is there altough the camera will just ignore it.
  - Now you can get the 3 available resolutions 640x480, 320x240 and 160x120
  - Now you can export the content to a buffer or directly to a jpeg file
- - You can print your jpeg buffer
+ - You can print your buffer to a jpeg file
  - I will soon explain the Returns of the functions; in simple words, if you get a 0 return, everything's fine. I will add this information soon.
 
 ----------
