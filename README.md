@@ -5,6 +5,7 @@ UPDATES!
 -------------
  - Now you can Change the compression Ratio 
   - I tried to change the ratio in the range specified by the manufacturer but the camera refuses to do so; anyways the option to change it is there altough the camera will just ignore it.
+ - Check out the RUN_EXAMPLE.txt so you can take a look at what you should be seeing when you run the main.c sample code
  - Now you can get the 3 available resolutions 640x480, 320x240 and 160x120
  - Now you can export the content to a buffer or directly to a jpeg file
  - You can print your buffer to a jpeg file
