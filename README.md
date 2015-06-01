@@ -56,7 +56,7 @@ void loop()
   - Be carefull not to connect the other 2 cables
  - Connect the RedUSB cable to the 5V pin of the camera
  - Connect the BlackUSB cable to the Ground pin of the camera and to the Arduino Ground
-![alt tag](https://github.com/humberto-garza/LinkspriteEdisonIRCamera/blob/master/Images/Arduino_Connection.jpg)
+![alt tag](https://github.com/humberto-garza/LinkspriteEdisonIRCamera/blob/master/Images/Arduino_setup.jpg)
  - Compile the code:
 ```sh
  gcc main.c -o main.out
