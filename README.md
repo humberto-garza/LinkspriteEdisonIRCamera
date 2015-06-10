@@ -74,7 +74,7 @@ Setting up your Mini-Breakout Board
 -------------
 In order to make this code work with your Mini-Breakout Board, you will need to consider several steps:
 - You need to keep in mind that you MUST use a Level Shifter. The one that I used was: [Texas Instruments TXB0108 8-Bit Bidirectional Voltage-Level Translator](http://www.ti.com/lit/ds/symlink/txb0108.pdf)
-- The easy way to activate the Serial Port to communicate with the camera is running this Arduino Sketch (This only needs to be run once! It will get rid of the extra end of line character sent from the camera to the Edison. After the reboot it should keep its configuration)
+- The easy way to activate the Serial Port to communicate with the camera is running this Arduino Sketch (This only needs to be run once! It will get rid of the extra **end-of-line** character sent from the camera to the Edison. After the reboot it should keep its configuration)
 ```sh
 void setup() 
 {  
