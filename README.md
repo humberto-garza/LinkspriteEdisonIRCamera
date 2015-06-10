@@ -68,53 +68,41 @@ void loop()
 ```
  - You will see that this sample main will output 2 fotos, the first one is created by printing the array that contains the photo, and the second one by printing directly to the file with no user-created array
 
-
- 
 ----------
 
-Reset Camera
+Setting up your Mini-Breakout Board
 -------------
-echo -n -e \\x56\\x00\\x26\\x00 > /dev/ttyMFD1
-
-Return: 76 00 26 00
-
-----------
-Send Take Picture
--------------
-echo -n -e \\x56\\x00\\x36\\x01\\x00 > /dev/ttyMFD1
-
-Return: 76 00 36 00 00 
-
-----------
-Read JPEG file size
--------------
-echo -n -e \\x56\\x00\\x34\\x01\\x00 > /dev/ttyMFD1
-
-Return: 76 00 34 00 04 00 00 XH XL
-
-----------
-Read JPEG file content
--------------
-56 00 32 0C 00 0A 00 00 MH ML 00 00 KH KL XX XX 
-
-00 00 MH ML = Starting Address
-
-00 00 KH KL = Length of JPEG file 
-
-XX XX = 00 0A	Recommended
-
-echo -n -e \\x56\\x00\\x32\\x0c\\x00\\x0a\\x00\\x00\\xMH\\xML\\x00\\x00\\xKH\\xKL\\xXX\\xXX > /dev/ttyMFD1
-
-Return: JPEG File
+In order to make this code work with your Mini-Breakout Board, you will need to consider several steps:
+- You need to take in mind that you MUST use a Level Shifter. The one that I used was: [Texas Instruments TXB0108 8-Bit Bidirectional Voltage-Level Translator](http://www.ti.com/lit/ds/symlink/txb0108.pdf)
+- The easy way to activate the Serial Port to communicate with the camera is running this Arduino Sketch (This only needs to be ran once! It will get rid of the extra end of line character sent from the camera to the Edison. After the reboot it should keep its configuration)
+```sh
+void setup() 
+{  
+       Serial1.begin(38400); 
+}  
+void loop() 
+{  
+       delay(1000);      
+}  
+```
+ - Add the **C Folder** files to a directory of your preference within the Edison (Yocto)
+ - Make sure you follow these connections (The IC show for the Level shifter supposes you have the proper Capacitor and resistor connected to make it work)
+ ![alt tag](https://github.com/humberto-garza/LinkspriteEdisonIRCamera/blob/master/Images/MiniBreakout_setup.jpg)
+ - Here is one example of the [level shifter](https://hetpro-store.com/convertidor-de-niveles-logicos-bidireccional-level-shifter-8ch/) used for this tutorial
+ - Compile the code:
+```sh
+ gcc main.c -o main.out
+```
+ - Run the code:
+```sh
+ chmod +x main.out
+ ./main.out
+```
+ - You will see that this sample main will output 6 fotos, the first one of each pair is created by printing the array that contains the photo, and the second one by printing directly to the file with no user-created array
 
 ----------
-Stop Taking Pictures
--------------
-echo -n -e \\x56\\x00\\x34\\x01\\x03 > /dev/ttyMFD1
 
-Return: 76 00 36 00 00 
 
-----------
 
 
 
