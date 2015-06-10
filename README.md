@@ -66,7 +66,7 @@ void loop()
  chmod +x main.out
  ./main.out
 ```
- - You will see that this sample main will output 2 fotos, the first one is created by printing the array that contains the photo, and the second one by printing directly to the file with no user-created array
+ - You will see that this **main** will output 6 fotos, the first one of each pair is created by printing the array that contains the photo, and the second one by printing directly to the file with no user-created array
 
 ----------
 
@@ -98,7 +98,7 @@ void loop()
  chmod +x main.out
  ./main.out
 ```
- - You will see that this sample main will output 6 fotos, the first one of each pair is created by printing the array that contains the photo, and the second one by printing directly to the file with no user-created array
+ - You will see that this **main** will output 6 fotos, the first one of each pair is created by printing the array that contains the photo, and the second one by printing directly to the file with no user-created array
 
 ----------
 
