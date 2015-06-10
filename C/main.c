@@ -18,13 +18,26 @@ int main( int argc, char *argv[] )
 	unsigned char f640 = 0x00; //640x480
 	unsigned char f320 = 0x11; //320x240
 	unsigned char f160 = 0x22; //160x120
-
 	
 	//////////////////////////////////
-	printf("Waiting /dev/ttyMFD1-camera to reset: ...\n");
+	//Make sure that the Device communication BAUD is set to 38400 right after connecting it
+	//38400 is the default BAUD
+	system("stty -F /dev/ttyMFD1 38400");
+	//////////////////////////////////
+
+
+	//Reset Camera
+	printf("Waiting /dev/ttyMFD1 camera to reset: ...\n");
 	x = reset_camera();
 	printf("Reset Status: %d\n",x);
 	printf("=======================================\n\n");
+	//////////////////////////////////
+	//Change BAUD
+	int baud = 9600;
+	printf("Changing BAUD to: %d\n",baud);
+	x = change_baud(baud);
+	printf("Change Baud Status:  %d\n", x);
+	printf("=======================================\n");
 	//////////////////////////////////
 
 	//Test 640x480 Resolution
@@ -106,6 +119,7 @@ int main( int argc, char *argv[] )
 	printf("=======================================\n");
 	//////////////////////////////////
 
+
 	//Test 160x120
 	printf("Changing Image Size...\n");
 	resolution = f160;
@@ -145,7 +159,26 @@ int main( int argc, char *argv[] )
 	printf("=======================================\n");
 	//////////////////////////////////
 
+
+	//Is better to reset the camera at the end od the program if you changed its BAUD
+	//Reset Camera
+	printf("Waiting /dev/ttyMFD1 camera to reset: ...\n");
+	x = reset_camera();
+	printf("Reset Status: %d\n",x);
+	printf("=======================================\n\n");
+	//////////////////////////////////
 	free(photo_buffer);
 	return 0;
 }
 
+/*
+________________________________
+|--Execution time --|---BAUD---|
+|--------9600-------|--43.708--|
+|-------19200-------|--43.820--|
+|-------38400-------|--44.332--|
+|-------57600-------|--44.082--|
+|------115200-------|--44.681--|
+|______________________________|
+
+*/

@@ -1,10 +1,14 @@
 root@edison:~/cam# gcc main.c -o main.out
 root@edison:~/cam# chmod +x main.out
-root@edison:~/cam# ./main.out
-Waiting /dev/ttyMFD1-camera to reset: ...
+root@edison:~/cam# time ./main.out
+=======================================
+Waiting /dev/ttyMFD1 camera to reset: ...
 Reset Status: 0
 =======================================
 
+Changing BAUD to: 9600
+Change Baud Status:  0
+=======================================
 Changing Image Size...
 Resize 00 Status:  0
 =======================================
@@ -12,7 +16,7 @@ Taking Photo...
 Taking Photo Status: 0
 =======================================
 Reading Photo Size: /dev/ttyMFD1...
-XHXL = be7c
+XHXL = bebc
 Reading Size Status: 0
 =======================================
 Exporting Photo to buffer...
@@ -36,7 +40,7 @@ Taking Photo...
 Taking Photo Status: 0
 =======================================
 Reading Photo Size: /dev/ttyMFD1...
-XHXL = 30b0
+XHXL = 3064
 Reading Size Status: 0
 =======================================
 Exporting Photo to buffer...
@@ -60,7 +64,7 @@ Taking Photo...
 Taking Photo Status: 0
 =======================================
 Reading Photo Size: /dev/ttyMFD1...
-XHXL = 0de0
+XHXL = 0e00
 Reading Size Status: 0
 =======================================
 Exporting Photo to buffer...
@@ -77,4 +81,12 @@ Stoping Cam: /dev/ttyMFD1...
 Stop Status: 0
 
 =======================================
-root@edison:~/cam#
+Waiting /dev/ttyMFD1 camera to reset: ...
+Reset Status: 0
+=======================================
+
+
+real    0m44.132s
+user    0m0.040s
+sys     0m0.030s
+root@edison:~/C#

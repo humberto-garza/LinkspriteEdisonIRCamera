@@ -16,4 +16,6 @@ void buf_to_pic(unsigned char **photo_buffer, int size, int num);
 int stop_cam();
 int compression_ratio(unsigned char XX);
 int image_size(unsigned char XX);
+
+int change_baud(int baud);
 #endif

@@ -19,6 +19,7 @@ int reset_camera()
 		result =0;
 	fclose(camera);
 	sleep(2);
+	system("stty -F /dev/ttyMFD1 38400");
 	return result;
 }
 
@@ -30,7 +31,6 @@ int take_picture()
 	FILE *camera = fopen("/dev/ttyMFD1", "a+");
 
 	fprintf(camera,"%c%c%c%c%c",take[0],take[1],take[2],take[3],take[4]);
-	
 	fgets(buf,4,camera);
 	//printf("%x_%x_%x_%x\n",buf[0],buf[1],buf[2],buf[3]);
 	if(buf[0]==0x76 && buf[2]==0x36)
@@ -217,3 +217,69 @@ int image_size(unsigned char XX)
 	return result;
 }	
 
+int change_baud(int baud)
+{
+	int result =-1;
+	//Default Baud = 38400
+	unsigned char BH = 0x2a; 
+	unsigned char BL = 0xf2;
+	switch(baud)
+	{
+		///////////////////////////
+		case 9600:
+			//printf("BAUD: %d\n",9600);
+			BH = 0xae; 
+			BL = 0xc8;
+			break;
+		///////////////////////////
+		case 19200:
+			//printf("BAUD: %d\n",19200);
+			BH = 0x56; 
+			BL = 0xe4;
+			break;
+		///////////////////////////
+		case 38400:
+			//printf("BAUD: %d\n",38400);
+			BH = 0x2a; 
+			BL = 0xf2;
+			break;
+		///////////////////////////
+		case 57600:
+			//printf("BAUD: %d\n",57600);
+			BH = 0x1c; 
+			BL = 0x4c;
+			break;;
+		///////////////////////////
+		case 115200:
+			//printf("BAUD: %d\n",115200);
+			BH = 0x0d; 
+			BL = 0xa6;
+			break;
+		///////////////////////////
+		default:
+			//printf("DEFAULT-38400-\n");
+			return result;
+			break;
+		///////////////////////////
+	}
+	
+	unsigned char buf[6];
+	unsigned char baudarr[7] = {0x56, 0x00, 0x24, 0x03 , 0x01, BH, BL}; 
+	FILE *camera = fopen("/dev/ttyMFD1", "a+");
+
+	fprintf(camera,"%c%c%c%c%c%c%c",baudarr[0],baudarr[1],baudarr[2],baudarr[3],baudarr[4],baudarr[5],baudarr[6]);
+	fgets(buf,5,camera);
+	//printf("%02x_%02x_%02x_%02x_%02x_%02x\n",buf[0],buf[1],buf[2],buf[3],buf[4]);
+	if(buf[0]==0x76 && buf[2]==0x24)
+		result =0;
+
+
+	char buffer[32]={0x00};
+	snprintf(buffer, sizeof(buffer),"stty -F /dev/ttyMFD1 %d", baud);
+	system(buffer);
+
+
+
+	fclose(camera);
+	return result;	
+}
