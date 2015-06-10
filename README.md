@@ -3,6 +3,8 @@ Infrared JPEG Color Camera Serial UART TTL Level - Edison Library
 
 UPDATES!
 -------------
+ - Now you can Change the BAUD of the camara; it does not increase the performance significantly, but it is available and may be useful
+ - Now you can Connect your Camera directly to the Edison mini-breakout board without the need of the Arduino Board!
  - Now you can Change the compression Ratio 
   - I tried to change the ratio in the range specified by the manufacturer but the camera refuses to do so; anyways the option to change it is there altough the camera will just ignore it.
  - Check out the RUN_EXAMPLE.txt so you can take a look at what you should be seeing when you run the **main.c** sample code
