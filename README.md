@@ -10,7 +10,7 @@ Index
    * [C Library](C)
   * [Arduino Board Setup](#arduino-board-setup)
   * [Mini-Breakout Board Setup](#mini-breakout-board-setup)
-  * [Copilation](#compilation)
+  * [Compilation](#compilation)
   * [Execution](#execution)
 
 Updates
@@ -70,16 +70,6 @@ void loop()
  - Connect the RedUSB cable to the 5V pin of the camera
  - Connect the BlackUSB cable to the Ground pin of the camera and to the Arduino Ground
 ![alt tag](https://github.com/humberto-garza/LinkspriteEdisonIRCamera/blob/master/Images/Arduino_setup.jpg)
- - Compile the code:
-```sh
- gcc main.c -o main.out
-```
- - Run the code:
-```sh
- chmod +x main.out
- ./main.out
-```
- - You will see that this **main** will output 6 fotos, the first one of each pair is created by printing the array that contains the photo, and the second one by printing directly to the file with no user-created array
  
 [Back to Top](#index)
 
@@ -102,7 +92,8 @@ void loop()
  - Make sure you follow these connections (The IC shows a Level shifter; it supposes that you have the right Capacitors and Resistors connected to make it work properly)
  ![alt tag](https://github.com/humberto-garza/LinkspriteEdisonIRCamera/blob/master/Images/MiniBreakout_setup.jpg)
  - Here is one example of the [level shifter](https://hetpro-store.com/convertidor-de-niveles-logicos-bidireccional-level-shifter-8ch/) used for this tutorial
-
+ 
+[Back to Top](#index)
 
 Compilation
 ============
@@ -111,6 +102,8 @@ Compile the code as follows:
 ```sh
  gcc main.c -o main.out
 ```
+ 
+[Back to Top](#index)
 
 Execution
 ============
