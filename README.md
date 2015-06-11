@@ -88,7 +88,7 @@ void loop()
 }  
 ```
  - Add the **C Folder** files to a directory of your preference within the Edison (Yocto)
- - Make sure you follow these connections (The IC shows a Level shifter; it supposes that you have the proper Capacitors and Resistors connected to make it work properly)
+ - Make sure you follow these connections (The IC shows a Level shifter; it supposes that you have the right Capacitors and Resistors connected to make it work properly)
  ![alt tag](https://github.com/humberto-garza/LinkspriteEdisonIRCamera/blob/master/Images/MiniBreakout_setup.jpg)
  - Here is one example of the [level shifter](https://hetpro-store.com/convertidor-de-niveles-logicos-bidireccional-level-shifter-8ch/) used for this tutorial
  - Compile the code:
