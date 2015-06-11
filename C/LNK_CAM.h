@@ -18,4 +18,6 @@ int compression_ratio(unsigned char XX);
 int image_size(unsigned char XX);
 
 int change_baud(int baud);
+int enter_power_saving();
+int exit_power_saving();
 #endif

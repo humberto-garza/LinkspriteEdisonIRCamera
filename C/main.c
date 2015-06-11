@@ -31,6 +31,25 @@ int main( int argc, char *argv[] )
 	x = reset_camera();
 	printf("Reset Status: %d\n",x);
 	printf("=======================================\n\n");
+
+	//////////////////////////////////
+	//Enter Power Saving
+	printf("Entering to Power Saving Mode\n");
+	x = enter_power_saving();
+	printf("Enter Power Saving Status:  %d\n", x);
+	printf("=======================================\n");
+
+	printf("Sleeping for 5 seconds...\n");
+	sleep(5);
+	printf("=======================================\n");
+	//Exit Power Saving
+	printf("Exiting from Power Saving Mode\n");
+	x = exit_power_saving();
+	printf("Exit Power Saving Status:  %d\n", x);
+	printf("=======================================\n");
+	//////////////////////////////////
+
+
 	//////////////////////////////////
 	//Change BAUD
 	int baud = 9600;
@@ -79,7 +98,6 @@ int main( int argc, char *argv[] )
 	printf("=======================================\n");
 	//////////////////////////////////
 
-
 	//Test 320x240
 	printf("Changing Image Size...\n");
 	resolution = f320;
@@ -118,7 +136,6 @@ int main( int argc, char *argv[] )
 	printf("Stop Status: %d\n\n",x);
 	printf("=======================================\n");
 	//////////////////////////////////
-
 
 	//Test 160x120
 	printf("Changing Image Size...\n");
@@ -159,7 +176,6 @@ int main( int argc, char *argv[] )
 	printf("=======================================\n");
 	//////////////////////////////////
 
-
 	//Is better to reset the camera at the end od the program if you changed its BAUD
 	//Reset Camera
 	printf("Waiting /dev/ttyMFD1 camera to reset: ...\n");
@@ -167,18 +183,8 @@ int main( int argc, char *argv[] )
 	printf("Reset Status: %d\n",x);
 	printf("=======================================\n\n");
 	//////////////////////////////////
+
 	free(photo_buffer);
 	return 0;
 }
 
-/*
-________________________________
-|--Execution time --|---BAUD---|
-|--------9600-------|--43.708--|
-|-------19200-------|--43.820--|
-|-------38400-------|--44.332--|
-|-------57600-------|--44.082--|
-|------115200-------|--44.681--|
-|______________________________|
-
-*/

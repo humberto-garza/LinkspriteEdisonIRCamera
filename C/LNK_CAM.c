@@ -283,3 +283,39 @@ int change_baud(int baud)
 	fclose(camera);
 	return result;	
 }
+
+int enter_power_saving()
+{
+	int result =-1;
+	unsigned char buf[5];
+	unsigned char enter[7] = {0x56, 0x00, 0x3E, 0x03 , 0x00, 0x01, 0x01}; 
+	FILE *camera = fopen("/dev/ttyMFD1", "a+");
+
+	fprintf(camera,"%c%c%c%c%c%c%c",enter[0],enter[1],enter[2],enter[3],enter[4],enter[5],enter[6]);
+	fgets(buf,5,camera);
+
+	//printf("%02x_%02x_%02x_%02x_%02x\n",buf[0],buf[1],buf[2],buf[3],buf[4]);
+	if(buf[0]==0x76 && buf[2]==0x3E)
+		result =0;
+	
+	fclose(camera);
+	return result;
+}	
+
+int exit_power_saving()
+{
+	int result =-1;
+	unsigned char buf[5];
+	unsigned char exitp[7] = {0x56, 0x00, 0x3E, 0x03 , 0x00, 0x01, 0x00}; 
+	FILE *camera = fopen("/dev/ttyMFD1", "a+");
+
+	fprintf(camera,"%c%c%c%c%c%c%c",exitp[0],exitp[1],exitp[2],exitp[3],exitp[4],exitp[5],exitp[6]);
+	fgets(buf,5,camera);
+
+	//printf("%02x_%02x_%02x_%02x_%02x\n",buf[0],buf[1],buf[2],buf[3],buf[4]);
+	if(buf[0]==0x76 && buf[2]==0x3E)
+		result =0;
+	
+	fclose(camera);
+	return result;
+}	
