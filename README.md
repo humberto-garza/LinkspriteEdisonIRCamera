@@ -13,6 +13,7 @@ Index
 Updates
 ============
 
+ - Now you activate and deactivate the Power Saving Mode
  - Now you can Change the BAUD of the camara; it does not increase the performance significantly, but it is available and may be useful
  - Now you can Connect your Camera directly to the Edison mini-breakout board without the need of the Arduino Board!
  - Now you can Change the compression Ratio 
@@ -29,7 +30,6 @@ Coming Next
 ============
 
 ### There will be some extra modifications and documentation
- - Function to Activate Power Saving Mode
  - Explanation of the function Returns
  
 [Back to Top](#index)
