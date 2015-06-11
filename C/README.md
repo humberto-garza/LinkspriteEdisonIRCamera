@@ -161,4 +161,4 @@ Information
 ===================
 If you need more information about the library, read the description found in the main folder
 
-[Back To Top](#intel-edison-linksprite-infrarerd-camera-library)
+[Back To Top](#intel-edison-linksprite-infrared-camera-library)
