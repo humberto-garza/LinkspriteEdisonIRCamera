@@ -46,38 +46,38 @@ The Code
 ===================
 > - In the main you will see an example of each of the functions implemented in this library
 > - **int reset_camera()**:
- > - Resets the camera
- > - Sleeps por 2 seconds (specified by the manufacturer so you can get to use it)
- > - If the camera is not responding, the program will be halted waiting for the reply
- > - If the camera was correctly reset it will return a 0 and a -1 otherwise
+>  - Resets the camera
+>  - Sleeps por 2 seconds (specified by the manufacturer so you can get to use it)
+>  - If the camera is not responding, the program will be halted waiting for the reply
+>  - If the camera was correctly reset it will return a 0 and a -1 otherwise
 > - **int enter_power_saving()**:
- > - Activates the power-saving-mode
- > - If the camera is not responding, the program will be halted waiting for the reply
- > - If the camera was correctly put in power-saving-mode it will return a 0 and a -1 otherwise
+>  - Activates the power-saving-mode
+>  - If the camera is not responding, the program will be halted waiting for the reply
+>  - If the camera was correctly put in power-saving-mode it will return a 0 and a -1 otherwise
 > - **int exit_power_saving()**:
- > - Deactivates the power-saving-mode
- > - If the camera is not responding, the program will be halted waiting for the reply
- > - If the camera was correctly put out of the power-saving-mode it will return a 0 and a -1 otherwise
+>  - Deactivates the power-saving-mode
+>  - If the camera is not responding, the program will be halted waiting for the reply
+>  - If the camera was correctly put out of the power-saving-mode it will return a 0 and a -1 otherwise
 > - **int change_baud(int baud)**:
- > - Changes the camera's serial communication BAUD
- > - The accepted BAUD Values are:
-  > - 9600
-  > - 19200
-  > - 38400
-  > - 57600
-  > - 115200
- > - If the BAUD chosen is not suported it will return a -1 
- > - If the camera is not responding, the program will be halted waiting for the reply
- > - If the camera changed its BAUD successfully it will return a 0 and a -2 otherwise
+>  - Changes the camera's serial communication BAUD
+>  - The accepted BAUD Values are:
+>   - 9600
+>   - 19200
+>   - 38400
+>   - 57600
+>   - 115200
+>  - If the BAUD chosen is not suported it will return a -1 
+>  - If the camera is not responding, the program will be halted waiting for the reply
+>  - If the camera changed its BAUD successfully it will return a 0 and a -2 otherwise
 > - **int image_size(unsigned char XX)**:
- > - Changes the camera's resolution
- > - The accepted Resolution values and their Codes are:
-  > - unsigned char XX = 0x00 // 640x480 
-  > - unsigned char XX = 0x11 // 320x240
-  > - unsigned char XX = 0x22 // 160x120
- > - If the resolution chosen is not suported it will return a -1 
- > - If the camera is not responding, the program will be halted waiting for the reply
- > - If the camera changed its resolution successfully it will return a 0 and a -1
+>  - Changes the camera's resolution
+>  - The accepted Resolution values and their Codes are:
+>   - unsigned char XX = 0x00 // 640x480 
+>   - unsigned char XX = 0x11 // 320x240
+>   - unsigned char XX = 0x22 // 160x120
+>  - If the resolution chosen is not suported it will return a -1 
+>  - If the camera is not responding, the program will be halted waiting for the reply
+>  - If the camera changed its resolution successfully it will return a 0 and a -1
 > - **int take_picture()**:
  > - Takes a photograph 
  > - If the camera is not responding, the program will be halted waiting for the reply
