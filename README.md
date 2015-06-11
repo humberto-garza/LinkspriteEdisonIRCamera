@@ -40,8 +40,7 @@ Resources
 
  - Infrared JPEG Color Camera Serial UART TTL Level [Web Page](http://store.linksprite.com/infrared-jpeg-color-camera-serial-uart-ttl-level/)
  - Infrared JPEG Color Camera Serial UART TTL Level [User Manual ](http://www.linksprite.com/upload/file/1291522825.pdf)
- 
- * [C Library](C)
+ - [C Library](C)
  
 [Back to Top](#index)
 
