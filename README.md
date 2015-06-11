@@ -29,14 +29,8 @@ Coming Next
 ============
 
 ### There will be some extra modifications and documentation
-
- - Function to Change Baud
- - Function to Change Ratio
- - Function to Change Resolution
  - Function to Activate Power Saving Mode
  - Explanation of the function Returns
- - Getting Started with the Arduino Expansion Board
- - Getting Started with the Mini Breakout Board
  
 [Back to Top](#index)
 
