@@ -107,8 +107,8 @@ ___
 > - Reads the previously-taken picure's size
 > - If the camera is not responding, the program will be halted waiting for the reply
 > - It takes two unsigned chars by reference (this will modify their value and store there the size of the photo):
->  - XH corresponds to the high part of the byte of the size
->  - XL corresponds to the low part of the byte of the size
+>  - **XH** corresponds to the high part of the byte of the size
+>  - **XL** corresponds to the low part of the byte of the size
 > - If the camera took the picture it will return a 0 and a -1 otherwise
 
 ___
