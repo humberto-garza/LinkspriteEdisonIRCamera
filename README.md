@@ -10,7 +10,9 @@ Index
    * [C Library](C)
   * [Arduino Board Setup](#arduino-board-setup)
   * [Mini-Breakout Board Setup](#mini-breakout-board-setup)
-  
+  * [Copilation](#compilation)
+  * [Execution](#execution)
+
 Updates
 ============
 
@@ -100,11 +102,20 @@ void loop()
  - Make sure you follow these connections (The IC shows a Level shifter; it supposes that you have the right Capacitors and Resistors connected to make it work properly)
  ![alt tag](https://github.com/humberto-garza/LinkspriteEdisonIRCamera/blob/master/Images/MiniBreakout_setup.jpg)
  - Here is one example of the [level shifter](https://hetpro-store.com/convertidor-de-niveles-logicos-bidireccional-level-shifter-8ch/) used for this tutorial
- - Compile the code:
+
+
+Compilation
+============
+Compile the code as follows:
+
 ```sh
  gcc main.c -o main.out
 ```
- - Run the code:
+
+Execution
+============
+Execute your file:
+
 ```sh
  chmod +x main.out
  ./main.out
