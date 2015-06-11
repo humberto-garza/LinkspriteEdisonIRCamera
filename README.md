@@ -1,14 +1,14 @@
 # LinkspriteEdisonIRCamera
 Infrared JPEG Color Camera Serial UART TTL Level - Edison Library
-
+ 
 Index
 =================
 
-  * [Updates](#Updates)
-  * [Coming Next](#Coming-Next)
-  * [Resources](#Resources)
-  * [Mini-Breakout Board Setup](#Mini-Breakout-Board-Setup)
-  * [Arduino Board Setup](#Arduino-Board-Setup)
+  * [Updates](#updates)
+  * [Coming Next](#coming-next)
+  * [Resources](#resources)
+  * [Mini-Breakout Board Setup](#mini-breakout-board-setup)
+  * [Arduino Board Setup](#arduino-board-setup)
   
 Updates
 ============
@@ -110,7 +110,7 @@ void loop()
  - You will see that this **main** will output 6 fotos, the first one of each pair is created by printing the array that contains the photo, and the second one by printing directly to the file with no user-created array
 
 
-[Back to Top](#Index)
+[Back to Top](#index)
 
 
 
