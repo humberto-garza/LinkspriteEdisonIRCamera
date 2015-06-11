@@ -7,8 +7,8 @@ Index
   * [Updates](#updates)
   * [Coming Next](#coming-next)
   * [Resources](#resources)
-  * [Mini-Breakout Board Setup](#mini-breakout-board-setup)
   * [Arduino Board Setup](#arduino-board-setup)
+  * [Mini-Breakout Board Setup](#mini-breakout-board-setup)
   
 Updates
 ============
@@ -79,7 +79,7 @@ void loop()
 ```
  - You will see that this **main** will output 6 fotos, the first one of each pair is created by printing the array that contains the photo, and the second one by printing directly to the file with no user-created array
 
-Mini-Breakout Setup
+Mini-Breakout Board Setup
 ============
 In order to make this code work with your Mini-Breakout Board, you will need to consider several steps:
 - You need to keep in mind that you MUST use a Level Shifter. The one that I used was: [Texas Instruments TXB0108 8-Bit Bidirectional Voltage-Level Translator](http://www.ti.com/lit/ds/symlink/txb0108.pdf)
