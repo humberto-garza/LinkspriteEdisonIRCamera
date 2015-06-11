@@ -9,6 +9,7 @@ Index
   * [Resources](#resources)
    * [C Library](C)
    * [Run Example](C/RUN_EXAMPLE.txt)
+   * [Output Images](Images)
   * [Arduino Board Setup](#arduino-board-setup)
   * [Mini-Breakout Board Setup](#mini-breakout-board-setup)
   * [Compilation](#compilation)
