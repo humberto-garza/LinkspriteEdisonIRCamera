@@ -7,6 +7,7 @@ Index
   * [Updates](#updates)
   * [Coming Next](#coming-next)
   * [Resources](#resources)
+   * [C Library](#C)
   * [Arduino Board Setup](#arduino-board-setup)
   * [Mini-Breakout Board Setup](#mini-breakout-board-setup)
   
