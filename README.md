@@ -1,8 +1,18 @@
 # LinkspriteEdisonIRCamera
 Infrared JPEG Color Camera Serial UART TTL Level - Edison Library
 
-UPDATES!
--------------
+Index
+=================
+
+  * [Updates](#Updates)
+  * [Coming Next](#Coming-Next)
+  * [Resources](#Resources)
+  * [Mini-Breakout Board Setup](#Mini-Breakout-Board-Setup)
+  * [Arduino Board Setup](#Arduino-Board-Setup)
+  
+Updates
+============
+
  - Now you can Change the BAUD of the camara; it does not increase the performance significantly, but it is available and may be useful
  - Now you can Connect your Camera directly to the Edison mini-breakout board without the need of the Arduino Board!
  - Now you can Change the compression Ratio 
@@ -13,7 +23,8 @@ UPDATES!
  - You can print your buffer to a jpeg file
  - I will soon explain the Returns of the functions; in simple words, if you get a 0 return, everything's fine. I will add this information soon.
 
-----------
+Coming Next
+============
 
 ### There will be some extra modifications and documentation
 
@@ -25,18 +36,16 @@ UPDATES!
  - Getting Started with the Arduino Expansion Board
  - Getting Started with the Mini Breakout Board
  
-----------
+
 
 Resources
--------------
+============
+
  - Infrared JPEG Color Camera Serial UART TTL Level [Web Page](http://store.linksprite.com/infrared-jpeg-color-camera-serial-uart-ttl-level/)
  - Infrared JPEG Color Camera Serial UART TTL Level [User Manual ](http://www.linksprite.com/upload/file/1291522825.pdf)
 
-
-----------
-
-Setting up your Arduino Board
--------------
+Arduino Board Setup
+============
 In order to make this code work with your Arduino Breakout Board, you will need to consider several steps:
  - Even though you will use your Arduino Board, you will program it using the Linux Terminal
 - The easy way to activate the Serial Port to communicate with the camera is running this Arduino Sketch:
@@ -70,10 +79,8 @@ void loop()
 ```
  - You will see that this **main** will output 6 fotos, the first one of each pair is created by printing the array that contains the photo, and the second one by printing directly to the file with no user-created array
 
-----------
-
-Setting up your Mini-Breakout Board
--------------
+Mini-Breakout Setup
+============
 In order to make this code work with your Mini-Breakout Board, you will need to consider several steps:
 - You need to keep in mind that you MUST use a Level Shifter. The one that I used was: [Texas Instruments TXB0108 8-Bit Bidirectional Voltage-Level Translator](http://www.ti.com/lit/ds/symlink/txb0108.pdf)
 - The easy way to activate the Serial Port to communicate with the camera is running this Arduino Sketch (This only needs to be run once! It will get rid of the extra **end-of-line** character sent from the camera to the Edison. After the reboot it should keep its configuration)
@@ -102,8 +109,8 @@ void loop()
 ```
  - You will see that this **main** will output 6 fotos, the first one of each pair is created by printing the array that contains the photo, and the second one by printing directly to the file with no user-created array
 
-----------
 
+[Back to Top](#Index)
 
 
 
