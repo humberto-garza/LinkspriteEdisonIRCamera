@@ -22,6 +22,7 @@ Updates
  - Now you can export the content to a buffer or directly to a jpeg file
  - You can print your buffer to a jpeg file
  - I will soon explain the Returns of the functions; in simple words, if you get a 0 return, everything's fine. I will add this information soon.
+ 
 [Back to Top](#index)
 
 Coming Next
@@ -36,6 +37,7 @@ Coming Next
  - Explanation of the function Returns
  - Getting Started with the Arduino Expansion Board
  - Getting Started with the Mini Breakout Board
+ 
 [Back to Top](#index)
 
 Resources
@@ -43,6 +45,7 @@ Resources
 
  - Infrared JPEG Color Camera Serial UART TTL Level [Web Page](http://store.linksprite.com/infrared-jpeg-color-camera-serial-uart-ttl-level/)
  - Infrared JPEG Color Camera Serial UART TTL Level [User Manual ](http://www.linksprite.com/upload/file/1291522825.pdf)
+ 
 [Back to Top](#index)
 
 Arduino Board Setup
@@ -79,6 +82,7 @@ void loop()
  ./main.out
 ```
  - You will see that this **main** will output 6 fotos, the first one of each pair is created by printing the array that contains the photo, and the second one by printing directly to the file with no user-created array
+ 
 [Back to Top](#index)
 
 Mini-Breakout Board Setup
