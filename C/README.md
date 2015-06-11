@@ -100,8 +100,10 @@ ___
 > - Takes a photograph 
 > - If the camera is not responding, the program will be halted waiting for the reply
 > - If the camera took the picture it will return a 0 and a -1 otherwise
+
 ___
 > **int read_size(unsigned char *XH,unsigned char *XL)**:
+
 > - Reads the previously-taken picure's size
 > - If the camera is not responding, the program will be halted waiting for the reply
 > - It takes two unsigned chars by reference (this will modify their value and store there the size of the photo):
