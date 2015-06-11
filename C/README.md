@@ -87,9 +87,9 @@ ___
 
 > - Changes the camera's resolution
 > - The accepted Resolution values and their Codes are:
->  - unsigned char XX = 0x00 // 640x480 
->  - unsigned char XX = 0x11 // 320x240
->  - unsigned char XX = 0x22 // 160x120
+>  - unsigned char **XX** = 0x00 // 640x480 
+>  - unsigned char **XX** = 0x11 // 320x240
+>  - unsigned char **XX** = 0x22 // 160x120
 > - If the resolution chosen is not suported it will return a -1 
 > - If the camera is not responding, the program will be halted waiting for the reply
 > - If the camera changed its resolution successfully it will return a 0 and a -1
@@ -116,8 +116,8 @@ ___
 
 > - This will export the data of the photo to a buffer sent by reference (photo_buffer)
 > - If the camera is not responding, the program will be halted waiting for the reply
->  - KH and KL represent the Size of the File
->  - MH and ML represent the starting address to read from (**This value must be 0x00 and 0x00!**)
+>  - **KH** and **KL** represent the Size of the File
+>  - **MH** and **ML** represent the starting address to read from (**This value must be 0x00 and 0x00!**)
 > - It returns by reference the size of the buffer (This modifies the value **size**)
 > - If the camera exported the data to the buffer properly it will return a 0 and a -1 otherwise
 
@@ -134,8 +134,8 @@ ___
 
 > - This will export the data of the photo to a **.jpeg** file
 > - If the camera is not responding, the program will be halted waiting for the reply
->  - KH and KL represent the Size of the File 
->  - MH and ML represent the starting address to read from (**This value must be 0x00 and 0x00!**)
+>  - **KH** and **KL** represent the Size of the File 
+>  - **MH** and **ML** represent the starting address to read from (**This value must be 0x00 and 0x00!**)
 > - It receives an int variable called **num** which represents the output name of the **.jpeg** file
 > - If the camera is not responding, the program will be halted waiting for the reply
 > - It will outpout the file in the working directory
