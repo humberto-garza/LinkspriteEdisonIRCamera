@@ -53,20 +53,23 @@ ___
 > - Sleeps por 2 seconds (specified by the manufacturer so you can get to use it)
 > - If the camera is not responding, the program will be halted waiting for the reply
 > - If the camera was correctly reset it will return a 0 and a -1 otherwise
+
 ___
->**int enter_power_saving()**:
+> **int enter_power_saving()**:
 
 > - Activates the power-saving-mode
 > - If the camera is not responding, the program will be halted waiting for the reply
 > - If the camera was correctly put in power-saving-mode it will return a 0 and a -1 otherwise
+
 ___
->**int exit_power_saving()**:
+> **int exit_power_saving()**:
 
 > - Deactivates the power-saving-mode
 > - If the camera is not responding, the program will be halted waiting for the reply
 > - If the camera was correctly put out of the power-saving-mode it will return a 0 and a -1 otherwise
+
 ___
->**int change_baud(int baud)**:
+> **int change_baud(int baud)**:
 
 > - Changes the camera's serial communication BAUD
 > - The accepted BAUD Values are:
@@ -78,6 +81,7 @@ ___
 > - If the BAUD chosen is not suported it will return a -1 
 > - If the camera is not responding, the program will be halted waiting for the reply
 > - If the camera changed its BAUD successfully it will return a 0 and a -2 otherwise
+
 ___
 > **int image_size(unsigned char XX)**:
 
@@ -89,6 +93,7 @@ ___
 > - If the resolution chosen is not suported it will return a -1 
 > - If the camera is not responding, the program will be halted waiting for the reply
 > - If the camera changed its resolution successfully it will return a 0 and a -1
+
 ___
 > **int take_picture()**:
 
@@ -103,6 +108,7 @@ ___
 >  - XH corresponds to the high part of the byte of the size
 >  - XL corresponds to the low part of the byte of the size
 > - If the camera took the picture it will return a 0 and a -1 otherwise
+
 ___
 > **int export_buf(unsigned char KH, unsigned char KL, unsigned char MH, unsigned char ML, unsigned char **photo_buffer, int *size)**:
 
@@ -112,6 +118,7 @@ ___
 >  - MH and ML represent the starting address to read from (**This value must be 0x00 and 0x00!**)
 > - It returns by reference the size of the buffer (This modifies the value **size**)
 > - If the camera exported the data to the buffer properly it will return a 0 and a -1 otherwise
+
 ___
 > **void buf_to_pic(unsigned char **photo_buffer, int size, int num)**:
 
@@ -119,6 +126,7 @@ ___
 > - It receives the size of the buffer and an int variable called **num** which represents the output name of the **.jpeg** file
 > - If the camera is not responding, the program will be halted waiting for the reply
 > - It will outpout the file in the working directory
+
 ___
 > **int export_pic(unsigned char KH, unsigned char KL, unsigned char MH, unsigned char ML, int i)**:
 
@@ -130,6 +138,7 @@ ___
 > - If the camera is not responding, the program will be halted waiting for the reply
 > - It will outpout the file in the working directory
 > - If the camera exported the data to the buffer properly it will return a 0 and if not it will return the number of bytes lost
+
 ___
 > **int stop_cam()**:
 
@@ -137,8 +146,10 @@ ___
 > - After this function is called, a new photo must be taken and there is no warranty that the last one will still be in the camera's memory
 > - If the camera is not responding, the program will be halted waiting for the reply
 > - If the camera stopped successfully it will return a 0 and if not it will return a -1
+
 ___
-> **int compression_ratio(unsigned char XX)**
+> **int compression_ratio(unsigned char XX)**:
+
 > - This function does not work properly in my camera. I am not sure if it cannot compress the ratio or my camera has some issues. Give it a try expect for the best (You should normally use a XX= 0x36)
 > - If the camera is not responding, the program will be halted waiting for the reply
 > - If the camera Compressed its ratio successfully it will return a 0 and a -1 otherwise
