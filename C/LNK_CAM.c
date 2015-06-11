@@ -262,7 +262,7 @@ int change_baud(int baud)
 			break;
 		///////////////////////////
 	}
-	
+	result = -2;
 	unsigned char buf[6];
 	unsigned char baudarr[7] = {0x56, 0x00, 0x24, 0x03 , 0x01, BH, BL}; 
 	FILE *camera = fopen("/dev/ttyMFD1", "a+");
