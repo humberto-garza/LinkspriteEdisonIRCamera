@@ -2,7 +2,7 @@
 Infrared JPEG Color Camera Serial UART TTL Level - Edison Library
  
 Index
-=================
+================= 
 
   * [Updates](#updates)
   * [Coming Next](#coming-next)
