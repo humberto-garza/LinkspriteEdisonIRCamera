@@ -100,6 +100,17 @@ void loop()
 
 Compilation
 ============
+When you connect the camera to the Serial2 you need to deactivate the Linux Console, you can achieve that using this commands:<br/>
+
+```
+systemctl stop serial-getty@ttyMFD2.service
+dmesg -n 1
+```
+
+After you did that you can use the Serial2 normally
+You will also have to connect the GPIO48(mraa33) to the LevelShifter Enable and use a 500Ohm resistor as a pulldown.
+
+
 Compile the code as follows:
 
 ```sh
