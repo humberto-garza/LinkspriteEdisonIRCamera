@@ -95,7 +95,7 @@ void loop()
  - Make sure you follow these connections (The IC shows a Level shifter; it supposes that you have the right Capacitors and Resistors connected to make it work properly)
  ![alt tag](Images/MiniBreakout_setup.jpg)<br/>
 
- In order to connect it to serial2:<br/>
+ In order to connect it to serial2 use this setup, this is useful to control with the MCU (**included in the C folder**):<br/>
   ![alt tag](Images/Serial2.jpg)<br/>
 
  - Here is one example of the [level shifter](https://hetpro-store.com/convertidor-de-niveles-logicos-bidireccional-level-shifter-8ch/) used for this tutorial
